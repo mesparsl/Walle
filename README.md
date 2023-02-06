@@ -301,7 +301,7 @@ demás
 ser
 
 
-PrensaCTRL+O para ahorrar yCTRL + X para salir del editor nano.
+Presiona CTRL+O para ahorrar yCTRL + X para salir del editor nano.
 Asegúrese de que la secuencia de comandos del administrador que creó tenga el nombre correcto y esté en el directorio correcto:/home/pi/mjpg-streamer.sh. Si desea guardar el script en una ubicación diferente, debe actualizar la línea 22 deapp.py.
 Para hacer que el script sea ejecutable por el servidor web, ejecute este comando en la terminal:chmod +x /home/pi/mjpg-streamer.sh
 Si desea que la cámara se inicie automáticamente cuando abra la interfaz web, puede cambiar la línea32 deapp.py aautoStartCamera = Verdadero
