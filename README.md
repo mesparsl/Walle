@@ -1,6 +1,5 @@
 # Walle
-El wall-e es nuestro proyecto final
-https://3dwork.io/wall-e-replica-impresion-3d/
+El wall-e es nuestro proyecto final nos hemos basado en este wall-e que encontramos por internet https://3dwork.io/wall-e-replica-impresion-3d/ hemos afrontado este proyecto de la mejor forma posible ya que estabamos muy pillados de tiempo ya que los 3 estabamos haciendo DUAL
 
 1. Código Arduino (pared-e)
 Programa principal para controlar los motores y servos del robot. Las características incluyen:
