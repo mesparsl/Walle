@@ -64,18 +64,18 @@ int preset[][2] = {{410,120}, // rotación de la cabeza
 Configure Raspberry Pi para ejecutar la última versión de Raspberry Pi OS (Raspbian) - Full. Las instrucciones de configuración se pueden encontrar en el sitio web de frambuesa pi.
 Abra la terminal de línea de comandos en la Raspberry Pi.
 Asegúrese de que la lista de paquetes se haya actualizado (esto puede llevar algún tiempo):sudo apt actualizar
-InstalarMatraz - este es un marco de Python utilizado para crear servidores web:
+Instalar Matraz - este es un marco de Python utilizado para crear servidores web:
 Asegúrese de que pip esté instalado:sudo apt instalar python3-pip
-Instale Flask y sus dependencias:sudo pip3 instalar matraz
-(Opcional) ElLleno La versión de Raspbian incluye estos paquetes de forma predeterminada, pero si está utilizando un sistema operativo diferente (por ejemplo, elUn poco versión), deberá ejecutar estos comandos:
+Instale Flask y sus dependencias:sudo pip3 install flask
+(Opcional) El lleno La versión de Raspbian incluye estos paquetes de forma predeterminada, pero si está utilizando un sistema operativo diferente (por ejemplo, elUn poco versión), deberá ejecutar estos comandos:
 sudo apt install git libsdl1.2 libsdl-mixer1.2
 sudo pip3 instalar pygame pyserial
 Clone el repositorio en el directorio de inicio de Raspberry Pi:
-discos compactos ~
-clon de git https://github.com/chillibasket/walle-replica.git
+cd ~
+git clone https://github.com/chillibasket/walle-replica.git
 Configure la contraseña del servidor web:
-Abiertoapp.py:nano ~/walle-réplica/web_interface/app.py
-En línea26 deapp.py donde esta diceponer_contraseña_aquí, inserte la contraseña que desea utilizar para la interfaz web.
+nano ~/walle-replica/web_interface/app.py
+En línea26 deapp.py donde esta dice put_password_here, inserte la contraseña que desea utilizar para la interfaz web.
 (Opcional) Cambie el directorio de audio predeterminado y la ubicación de la secuencia de comandos utilizada para iniciar/detener la transmisión de video.
 Si siguió exactamente los pasos anteriores, no hay necesidad de hacerlo. Sin embargo, si desea mover los archivos de la interfaz web a un directorio diferente en Raspberry Pi, deberá cambiar la ubicación donde el programa buscará los archivos de audio.
 En línea29 deapp.py, escriba el directorio donde se encuentran los archivos de audio. Asegúrese de que la ubicación del directorio termine con una barra diagonal:/.
@@ -87,181 +87,8 @@ Para hacer que la interfaz se conecte automáticamente al Arduino cuando se inic
 PrensaCTRL+O para ahorrar yCTRL + X para salir del editor nano.
 
 [b] Uso del servidor web
-Para determinar la dirección IP actual de Raspberry Pi en su red, escriba el comando:nombre de host -I
+Para determinar la dirección IP actual de Raspberry Pi en su red, escriba el comando: hostname -I
 Para iniciar el servidor:python3 ~/walle-réplica/web_interface/app.py
 Para acceder a la interfaz web, abra un navegador en cualquier computadora/dispositivo en la misma red y escriba la dirección IP de la Raspberry Pi, siga por:5000. Por ejemplo192.168.1.10:5000
 Para detener el servidor presione:CTRL + C
 Para comenzar a controlar el robot, primero debe iniciar la comunicación en serie con el Arduino. Para ello, acceda a laAjustes pestaña de la interfaz web, seleccione el puerto serie correcto de la lista desplegable y presione en elreconectar botón.
-
-[c] Adición de una secuencia de cámara (opcional)
-Si está utilizando la cámara oficial de Raspberry Pi, primero deberá habilitar la cámara ensudo raspi-config. En la pantalla de configuración que aparece, vaya a "Opciones de interfaz" > "Cámara" > "Habilitar".
-Instalarstreamer-mjpg - esto se usa para transmitir el video al servidor web. Los pasos a continuación se basan en las instruccionesdescrito aquí para el proyecto CNC JS. Para instalar las bibliotecas necesarias, ejecute todos los siguientes comandos:
-# Actualizar e instalar herramientas
-sudo apt-get update-y
-sudo apt-get upgrade-y
-sudo apt-get install build-essential git imagemagick libv4l-dev libjpeg-dev cmake -y
-
-# Clonar repositorio en /tmp
-cd/tmp
-clon de git https://github.com/jacksonliam/mjpg-streamer.git
-cd mjpg-streamer/mjpg-streamer-experimental
-
-# Hacer
-hacer
-sudo hacer instalar
-
-
-Cree un nuevo script que se usará para iniciar y detener la transmisión de la cámara:nano ~/mjpg-streamer.sh
-Pegue el siguiente código en el archivo de script; puede modificar la configuración de la velocidad de fotogramas, la calidad y la resolución para adaptarla a la cámara que está utilizando:
-#!/bin/bash
-# chmod +x mjpg-streamer.sh
-# Crontab: @reboot /home/pi/mjpg-streamer/mjpg-streamer.sh inicio
-# Crontab: @reboot /home/pi/mjpg-streamer/mjpg-streamer-experimental/mjpg-streamer.sh inicio
-
-MJPG_STREAMER_BIN="/usr/local/bin/mjpg_streamer" # "$(dirname $0)/mjpg_streamer"
-MJPG_STREAMER_WWW="/usr/local/share/mjpg-streamer/www"
-MJPG_STREAMER_LOG_FILE="${0%.*}.log" # "$(dirname $0)/mjpg-streamer.log"
-RUNNING_CHECK_INTERVAL="2" # con qué frecuencia verificar para asegurarse de que el servidor se está ejecutando (en segundos)
-HANGING_CHECK_INTERVAL="3" # con qué frecuencia verificar para asegurarse de que el servidor no se cuelgue (en segundos)
-
-VIDEO_DEV="/dev/video0"
-FRAME_RATE="5"
-CALIDAD="80"
-RESOLUTION="1280x720"  # 160x120 176x144 320x240 352x288 424x240 432x240 640x360 640x480 800x448 800x600 960x544 1280x720 1920x1080 (QVGA, VGA, SVGA, WXGA)   #  lsusb -s 001:006 -v | egrep "Ancho|Alto" # https://www.textfixer.com/tools/alphabetical-order.php # v4l2-ctl --list-formats-ext # Mostrar formatos de video admitidos
-PUERTO="8080"
-YUV="verdadero"
-
-###############INPUT_OPTIONS="-r ${RESOLUCIÓN} -d ${VIDEO_DEV} -f ${FRAME_RATE} -q ${CALIDAD} -pl 60hz"
-INPUT_OPTIONS="-r ${RESOLUTION} -d ${VIDEO_DEV} -q ${QUALITY} -pl 60hz --every_frame 2" # Limite la velocidad de fotogramas con "--every_frame", ( mjpg_streamer --input "input_uvc.so -- ayuda" )
-
-
-if [ "${YUV}" == "verdadero" ]; entonces
-    INPUT_OPTIONS+=" -y"
-ser
-
-OUTPUT_OPTIONS="-p ${PUERTO} -w ${MJPG_STREAMER_WWW}"
-
-# ================================================= =========
-función en ejecución() {
-    si ps aux | grep${MJPG_STREAMER_BIN} | grep ${VIDEO_DEV} >/dev/null 2>&1; entonces
-        volver 0
-
-    demás
-        volver 1
-
-    ser
-}
-
-inicio de función () {
-    si está corriendo; entonces
-        echo "[$VIDEO_DEV] ya comenzó"
-        volver 1
-    ser
-
-    export LD_LIBRARY_PATH="$(dirname $MJPG_STREAMER_BIN):".
-
-    echo "Iniciando: [$VIDEO_DEV] ${MJPG_STREAMER_BIN} -i \"input_uvc.so ${INPUT_OPTIONS}\" -o \"output_http.so ${OUTPUT_OPTIONS}\""
-    ${MJPG_STREAMER_BIN} -i "input_uvc.so ${INPUT_OPTIONS}" -o "output_http.so ${OUTPUT_OPTIONS}" >> ${MJPG_STREAMER_LOG_FILE} 2>&1 &
-
-    dormir 1
-
-    si está corriendo; entonces
-        if [ "$1" != "nocheck" ]; entonces
-            check_running & > /dev/null 2>&1 # iniciar la tarea de comprobación en ejecución
-            check_hanging & > /dev/null 2>&1 # iniciar la tarea de comprobación de colgantes
-        ser
-
-        echo "[$VIDEO_DEV] comenzó"
-        volver 0
-
-    demás
-        echo "[$VIDEO_DEV] no se pudo iniciar"
-        volver 1
-
-    ser
-}
-
-función detener() {
-    si ! correr; entonces
-        echo "[$VIDEO_DEV] no se está ejecutando"
-        volver 1
-    ser
-
-    propio_pid=$$
-
-    if [ "$1" != "nocheck" ]; entonces
-        # detener el script que ejecuta la tarea de verificación
-        ps auxiliar | grep $0 | inicio de grep | tr -s ' ' | cortar -d ' ' -f 2 | grep -v ${propio_pid} | xargs -r matar
-        dormir 0.5
-    ser
-
-    # detener el servidor
-    ps auxiliar | grep${MJPG_STREAMER_BIN} | grep ${VIDEO_DEV} | tr -s ' ' | cortar -d ' ' -f 2 | grep -v ${propio_pid} | xargs -r matar
-
-    echo "[$VIDEO_DEV] detenido"
-    volver 0
-}
-
-función verificar_ejecutar() {
-    echo "[$VIDEO_DEV] comenzando a ejecutar la tarea de verificación" >> ${MJPG_STREAMER_LOG_FILE}
-
-    mientras que cierto; hacer
-        dormir ${RUNNING_CHECK_INTERVAL}
-
-        si ! correr; entonces
-            echo "[$VIDEO_DEV] servidor detenido, iniciando" >> ${MJPG_STREAMER_LOG_FILE}
-            empezar sin verificar
-        ser
-    hecho
-}
-
-función comprobar_colgar() {
-    echo "[$VIDEO_DEV] iniciando la tarea de comprobación pendiente" >> ${MJPG_STREAMER_LOG_FILE}
-
-    mientras que cierto; hacer
-        dormir ${HANGING_CHECK_INTERVAL}
-
-        # tratar el caso de "error al capturar fotogramas"
-        si cola -n2 ${MJPG_STREAMER_LOG_FILE} | grep -i "error al capturar fotogramas" > /dev/null; entonces
-            echo "[$VIDEO_DEV] el servidor está colgando, matando" >> ${MJPG_STREAMER_LOG_FILE}
-            no dejes de comprobar
-        ser
-    hecho
-}
-
-función de ayuda () {
-    echo "Uso: $0 [iniciar|detener|reiniciar|estado]"
-    volver 0
-}
-
-if [ "$1" == "inicio" ]; entonces
-    iniciar && salir 0 || salida -1
-
-elif [ "$1" == "detener" ]; entonces
-    detener && salir 0 || salida -1
-
-elif [ "$1" == "reiniciar" ]; entonces
-    detener y dormir 1
-    iniciar && salir 0 || salida -1
-
-elif [ "$1" == "estado" ]; entonces
-    si está corriendo; entonces
-        echo "[$VIDEO_DEV] en ejecución"
-        salida 0
-
-    demás
-        echo "[$VIDEO_DEV] detenido"
-        salida 1
-
-    ser
-
-demás
-    ayuda
-
-ser
-
-
-Presiona CTRL+O para ahorrar yCTRL + X para salir del editor nano.
-Asegúrese de que la secuencia de comandos del administrador que creó tenga el nombre correcto y esté en el directorio correcto:/home/pi/mjpg-streamer.sh. Si desea guardar el script en una ubicación diferente, debe actualizar la línea 22 deapp.py.
-Para hacer que el script sea ejecutable por el servidor web, ejecute este comando en la terminal:chmod +x /home/pi/mjpg-streamer.sh
-Si desea que la cámara se inicie automáticamente cuando abra la interfaz web, puede cambiar la línea32 deapp.py aautoStartCamera = Verdadero
