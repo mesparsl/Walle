@@ -51,13 +51,15 @@ Envía el carácter 'a' y 'd' para mover el motor hacia adelante y hacia atrás 
 Una vez que el motor esté en la posición correcta, envíe el carácter 'n' para continuar con el paso de calibración. Pasará a la posición ALTA del mismo servo, después de lo cual el proceso se repetirá para cada uno de los 7 servos del robot.
 Cuando todas las articulaciones estén calibradas, el boceto generará una matriz que contiene los valores de calibración en el monitor en serie.
 Copie la matriz y péguela en lineas 144 al 150 del programawall-e.ino. La matriz debería verse similar a esto:
-int preset[][2] = {{410,120}, // rotación de la cabeza
-                    {532178}, // parte superior del cuello
-                    {120310}, // parte inferior del cuello
-                    {465271}, // ojo derecho
-                    {278479}, // ojo izquierdo
-                    {340135}, // brazo izquierdo
-                    {150360}}; // brazo derecho
+int preset[][2] = 
+
+{{410,120}, // rotación de la cabeza
+{532178}, // parte superior del cuello
+{120310}, // parte inferior del cuello
+{465271}, // ojo derecho
+{278479}, // ojo izquierdo
+{340135}, // brazo izquierdo
+{150360}}; // brazo derecho
 
 2. Servidor web Raspberry Pi
 [a] Instalación básica
