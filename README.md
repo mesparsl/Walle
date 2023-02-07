@@ -59,45 +59,6 @@ int preset[][2] = {{410,120}, // rotación de la cabeza
                     {340135}, // brazo izquierdo
                     {150360}}; // brazo derecho
 
-[d] Detección de nivel de batería (opcional)
-Al usar baterías para alimentar el robot, es importante realizar un seguimiento de cuánta energía queda. Algunas baterías pueden romperse si se descargan en exceso, y la tarjeta SD de la Raspberry Pi puede dañarse si no se suministra suficiente energía.
-Para usar la función de detección de nivel de batería en el Arduino, conecte las siguientes resistencias y cableado como se muestra en la imagen a continuación. Las resistencias (divisor de potencial) reducen el voltaje de 12 V a un valor inferior a 5 V, lo que es seguro para que Arduino lo mida usando sus pines analógicos. Los valores de resistencia recomendados sonR1 = 100 kΩ yR2 = 47kΩ.
-Descomentar línea 54 #definir BAT_L en el boceto principal de Arduinowall-e.ino.
-Si está utilizando diferentes valores de resistencia, cambie el valor del factor de ganancia del divisor potencial en la línea 54 del esquema, de acuerdo con la fórmula:POT_DIV = R2 / (R1 + R2).
-El programa ahora debería verificar automáticamente el nivel de la batería cada 10 segundos, y este nivel se mostrará en la interfaz web de Raspberry Pi en la sección "Estado".
-
-Diagrama que muestra el cableado del circuito de detección de nivel de batería
-
-[e] Pantalla LED (Opcional) (Aportado por:escarabajo)
-Es posible integrar una pequeña pantalla oLED que mostrará el nivel de batería del robot en el panel indicador de batería frontal. Esta característica requiere que el circuito de detección de nivel de batería en la sección anterior esté habilitado, y la pantalla se actualizará cada vez que se calcule el nivel de batería. Esta función utiliza la biblioteca de visualización u8g2 en modo página; en el Arduino UNO puede recibir una advertencia de que el uso de la memoria es alto, pero esta advertencia puede ignorarse.
-Para usar la función de pantalla oLed en el Arduino, conecte una pantalla oLed i2c en el bus i2c en el módulo del servomotor (vea el diagrama).
-Instale la biblioteca U8g2 en el administrador de bibliotecas de Arduino:
-Vaya a Sketch -> Incluir biblioteca -> Administrar bibliotecas...
-BuscarU8gt. El editor de la biblioteca es "oliver".
-Instale la última versión de la biblioteca.
-Descomentar línea 74 #definir OLED en el boceto principal de Arduinowall-e.ino.
-Si está utilizando una pantalla diferente que es compatible con la biblioteca, puede cambiar el constructor enlínea 78 como se documenta en elpágina de referencia de la biblioteca. El valor predeterminado es para una pantalla SH1106_128X64_NONAME.
-
-Diagrama que muestra el cableado de la pantalla oLed
-
-[f] Adición de sus propias animaciones servo (opcional)
-Mi código viene con dos animaciones que replican escenas de la película; el movimiento de los ojos que hace Wall-E cuando arranca, y una secuencia de movimientos mientras Wall-E mira inquisitivamente a su alrededor. A partir de la versión 2.7 del código, ahora es más fácil agregar sus propias animaciones de servomotor para que pueda hacer que su Wall-E realice otros movimientos...
-Abre el archivo animaciones.ino, que se encuentra en la misma carpeta que el boceto principal de Arduino.
-Cada comando de animación consta de las posiciones a las que desea que se mueva cada uno de los servomotores y la cantidad de tiempo que la animación debe esperar hasta pasar a la siguiente instrucción.
-Puede agregar una nueva animación insertando un extra caso sección en la sentencia switch. Debe insertar su código adicional en el espacio sobre el por defecto sección. Por ejemplo:
-caso 3:
-        // --- Título de su nueva secuencia de movimiento ---
-        // tiempo,cabeza,necT,necB,eyeR,eyeL,armL,armR
-        cola.push({ 12, 48, 40, 0, 35, 45, 60, 59});
-        cola.push({1500, 48, 40, 20, 100, 0, 80, 80});
-        // Agregue tantos movimientos adicionales aquí como necesite para completar la animación
-        // queue.push({tiempo, rotación de la cabeza, parte superior del cuello, parte inferior del cuello, ojo derecho, ojo izquierdo, brazo izquierdo, brazo derecho})
-        romper;
-El tiempo debe ser un número en milisegundos (por ejemplo, 3,5 segundos = 3500)
-Los comandos de posición del servomotor deben ser un número entero entre 0 y 100, donde 0 = BAJO y 100 = ALTO posición del servo según lo calibrado en el  wall-e_calibration.ino bosquejo.
-Si desea deshabilitar un motor para un movimiento específico, puede usar -1.
-
-
 2. Servidor web Raspberry Pi
 [a] Instalación básica
 Configure Raspberry Pi para ejecutar la última versión de Raspberry Pi OS (Raspbian) - Full. Las instrucciones de configuración se pueden encontrar en el sitio web de frambuesa pi.
