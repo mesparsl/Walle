@@ -94,3 +94,4 @@ Para iniciar el servidor:python3 ~/walle-réplica/web_interface/app.py
 Para acceder a la interfaz web, abra un navegador en cualquier computadora/dispositivo en la misma red y escriba la dirección IP de la Raspberry Pi, siga por:5000. Por ejemplo192.168.1.10:5000
 Para detener el servidor presione:CTRL + C
 Para comenzar a controlar el robot, primero debe iniciar la comunicación en serie con el Arduino. Para ello, acceda a laAjustes pestaña de la interfaz web, seleccione el puerto serie correcto de la lista desplegable y presione en elreconectar botón.
+ 
