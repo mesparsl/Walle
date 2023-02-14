@@ -65,12 +65,12 @@ int preset[][2] =
 [a] Instalación básica
 Configure Raspberry Pi para ejecutar la última versión de Raspberry Pi OS (Raspbian) - Full. Las instrucciones de configuración se pueden encontrar en el sitio web de frambuesa pi.
 Abra la terminal de línea de comandos en la Raspberry Pi.
-Asegúrese de que la lista de paquetes se haya actualizado (esto puede llevar algún tiempo):sudo apt actualizar
+Asegúrese de que la lista de paquetes se haya actualizado (esto puede llevar algún tiempo):sudo apt update
 Instalar Matraz - este es un marco de Python utilizado para crear servidores web:
-Asegúrese de que pip esté instalado:sudo apt instalar python3-pip
-Instale Flask y sus dependencias:sudo pip3 install flask
-(Opcional) El lleno La versión de Raspbian incluye estos paquetes de forma predeterminada, pero si está utilizando un sistema operativo diferente (por ejemplo, elUn poco versión), deberá ejecutar estos comandos:
-sudo apt install git libsdl1.2 libsdl-mixer1.2
+Asegúrese de que pip esté instalado:sudo apt-get install python3-pip
+Instale Flask y sus dependencias:sudo apt-get install python3-flask
+sudo apt install git libsdl1.2-dev
+sudo apt install git libsdl-mixer1.2-dev
 sudo pip3 instalar pygame pyserial
 Clone el repositorio en el directorio de inicio de Raspberry Pi:
 cd ~
