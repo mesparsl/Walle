@@ -10,6 +10,7 @@ Análisis en serie sin bloqueo, que permite el control remoto de los movimientos
 Supervisión del nivel de la batería mediante un circuito divisor de potencial.
 
 2. Servidor web Raspberry Pi (interfaz_web)
+
 La interfaz web está programada en Python y utilizaMatraz para generar un servidor. La Raspberry Pi se conecta a través de USB al microcontrolador Arduino. Las características principales son:
 Un joystick JavaScript, con el que se puede controlar fácilmente el movimiento del robot.
 Control manual de todos los servomotores.
