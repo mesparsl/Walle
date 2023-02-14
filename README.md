@@ -2,6 +2,7 @@
 El wall-e es nuestro proyecto final nos hemos basado en este wall-e que encontramos por internet https://3dwork.io/wall-e-replica-impresion-3d/ hemos afrontado este proyecto de la mejor forma posible ya que estabamos muy pillados de tiempo ya que los 3 estabamos haciendo DUAL
 
 1. Código Arduino (pared-e)
+
 Programa principal para controlar los motores y servos del robot. Las características incluyen:
 Una cola de animación, que realiza un seguimiento de los próximos movimientos de servo que el robot debe realizar.
 Un generador de movimiento aleatorio, que permite que el robot se mueva de forma autónoma y parezca animado.
