@@ -156,7 +156,7 @@ Si desea que el puerto serie utilizado por Arduino se seleccione de forma predet
 
 Para hacer que la interfaz se conecte automáticamente al Arduino cuando se inicia, puede cambiar la línea31 aautoStartArduino = Verdadero
 
-PrensaCTRL+O para ahorrar yCTRL + X para salir del editor nano.
+Prensa CTRL+O para ahorrar yCTRL + X para salir del editor nano.
 
 [b] Uso del servidor web
 
