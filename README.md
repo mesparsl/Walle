@@ -168,5 +168,9 @@ Para acceder a la interfaz web, abra un navegador en cualquier computadora/dispo
 Para detener el servidor presione:CTRL + C
 
 Para comenzar a controlar el robot, primero debe iniciar la comunicación en serie con el Arduino. Para ello, acceda a laAjustes pestaña de la interfaz web, seleccione el puerto serie correcto de la lista desplegable y presione en elreconectar botón.
- 
+
+![image](https://user-images.githubusercontent.com/124558681/219349240-45c988bf-031b-4cdc-a12d-8d9cf39b97a3.png)
+
 ![image](https://user-images.githubusercontent.com/124558681/219346511-f95e8fbe-eb8b-4622-ab1d-397a0f2a055b.png)
+
+![image](https://user-images.githubusercontent.com/124558681/219349122-5fb46807-cc09-47a3-9981-7172d94dde34.png)
