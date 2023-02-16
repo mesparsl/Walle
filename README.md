@@ -1,6 +1,15 @@
 # Walle
 El wall-e es nuestro proyecto final nos hemos basado en este wall-e que encontramos por internet https://3dwork.io/wall-e-replica-impresion-3d/
-![image](https://user-images.githubusercontent.com/124558681/219344904-b29a2cb5-0929-498d-a3b3-13a339d1f519.png)
+!
+
+[image](https://user-images.githubusercontent.com/124558681/219344904-b29a2cb5-0929-498d-a3b3-13a339d1f519.png)
+
+![image](https://user-images.githubusercontent.com/124558681/219345127-665d8ab7-9a26-4f61-9961-66b2fd04af53.png)
+
+![image](https://user-images.githubusercontent.com/124558681/219345233-ce226052-e31f-40c0-b928-545467cb2395.png)
+
+![image](https://user-images.githubusercontent.com/124558681/219345407-40a3ea62-2361-4a4c-a030-557085c171d3.png)
+
 
 1. Código Arduino (wall-e)
 
@@ -15,6 +24,7 @@ Control de velocidad de todos los servomotores, facilitando aceleraciones y desa
 Análisis en serie sin bloqueo, que permite el control remoto de los movimientos del robot.
 
 Supervisión del nivel de la batería mediante un circuito divisor de potencial.
+
 
 2. Servidor web Raspberry Pi (interfaz_web)
 
@@ -64,6 +74,8 @@ Diagrama que muestra el cableado de los componentes electrónicos del robot.
 
 [b] Prueba del programa principal
 
+![image](https://user-images.githubusercontent.com/124558681/219345832-1cede5c3-23d4-419e-b573-4160666d22b8.png)
+
 Una vez que el boceto se haya cargado en el Arduino, encienda la batería de 12 V mientras el microcontrolador aún está conectado a la computadora.
 
 Abre el monitor de serie (botón en la parte superior derecha de Arduino IDE). Establezca la velocidad en baudios en 115200.
@@ -92,21 +104,7 @@ Cuando todas las articulaciones estén calibradas, el boceto generará una matri
 
 Copie la matriz y péguela en lineas 144 al 150 del programawall-e.ino. La matriz debería verse similar a esto:
 
-int preset[][2] = 
-
-{{410,120}, // rotación de la cabeza
-
-{532178}, // parte superior del cuello
-
-{120310}, // parte inferior del cuello
-
-{465271}, // ojo derecho
-
-{278479}, // ojo izquierdo
-
-{340135}, // brazo izquierdo
-
-{150360}}; // brazo derecho
+![image](https://user-images.githubusercontent.com/124558681/219345675-00d50894-3fb8-43b6-ab68-519fc2384b34.png)
 
 2. Servidor web Raspberry Pi
 
@@ -145,9 +143,9 @@ En línea26 deapp.py donde esta dice put_password_here, inserte la contraseña q
 
 Si siguió exactamente los pasos anteriores, no hay necesidad de hacerlo. Sin embargo, si desea mover los archivos de la interfaz web a un directorio diferente en Raspberry Pi, deberá cambiar la ubicación donde el programa buscará los archivos de audio.
 
-En línea29 deapp.py, escriba el directorio donde se encuentran los archivos de audio. Asegúrese de que la ubicación del directorio termine con una barra diagonal:/.
+En línea29 de app.py, escriba el directorio donde se encuentran los archivos de audio. Asegúrese de que la ubicación del directorio termine con una barra diagonal:/.
 
-En línea28 deapp.py, se puede modificar la ubicación del script utilizado para iniciar y detener la transmisión de la cámara de video.
+En línea28 de app.py, se puede modificar la ubicación del script utilizado para iniciar y detener la transmisión de la cámara de video.
 
 Conéctese al Arduino/microcontrolador:
 
@@ -171,3 +169,4 @@ Para detener el servidor presione:CTRL + C
 
 Para comenzar a controlar el robot, primero debe iniciar la comunicación en serie con el Arduino. Para ello, acceda a laAjustes pestaña de la interfaz web, seleccione el puerto serie correcto de la lista desplegable y presione en elreconectar botón.
  
+![image](https://user-images.githubusercontent.com/124558681/219346511-f95e8fbe-eb8b-4622-ab1d-397a0f2a055b.png)
