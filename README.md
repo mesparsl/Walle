@@ -1,7 +1,8 @@
 # Walle
 El wall-e es nuestro proyecto final nos hemos basado en este wall-e que encontramos por internet https://3dwork.io/wall-e-replica-impresion-3d/
+![image](https://user-images.githubusercontent.com/124558681/219344904-b29a2cb5-0929-498d-a3b3-13a339d1f519.png)
 
-1. Código Arduino (pared-e)
+1. Código Arduino (wall-e)
 
 Programa principal para controlar los motores y servos del robot. Las características incluyen:
 
